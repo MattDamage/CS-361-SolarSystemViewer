@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Solar System Explorer - Search Results</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+
 <body class="search-body">
     <div class="container">
         <h1>Search Results for: "{{ query if query else '' }}"</h1>
@@ -18,19 +20,27 @@
                 Type: {{ obj.type.name }}{% if obj.discovery %} • Discovered: {{ obj.discovery }}{% endif %}
             </div>
             <button class="btn" onclick="window.location.href='{{ url_for('object_page', name=obj.name) }}'">View Info</button>
-
-
-            
-            
-            <button>Bookmark</button>
+            <button class="btn" onclick="addBookmark('{{ obj.name }}')">Bookmark</button>
         </div>
         {% endfor %}
-    {% else %}
+        {% else %}
         <p>No results found.</p>
-    {% endif %}
-      
-        
+        {% endif %}
+
+
         <button class="btn" onclick="window.location.href='{{ url_for('search_page') }}'">Back to Search</button>
     </div>
 </body>
+
+
+<script>
+    function addBookmark(name) {
+        fetch(`/bookmark/add/${encodeURIComponent(name)}`)
+            .then(res => res.json())
+            .then(data => {
+                alert(`${data.name} added to bookmarks!`);
+            });
+    }
+</script>
+
 </html>

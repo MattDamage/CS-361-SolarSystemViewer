@@ -13,27 +13,27 @@ body.splash-body {
     align-items: center;
     height: 100vh;
     text-align: center;
-  }
-  
-  .splash-container {
+}
+
+.splash-container {
     background-color: rgba(20, 20, 30, 0.85);
     padding: 40px 30px;
     border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.7);
-  }
-  
-  .splash-container h1 {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.splash-container h1 {
     font-size: 3rem;
     margin-bottom: 20px;
     color: #9dc6ff;
-  }
-  
-  .splash-container p {
+}
+
+.splash-container p {
     font-size: 1.2rem;
     margin-bottom: 30px;
-  }
-  
-  button {
+}
+
+button {
     padding: 12px 30px;
     background-color: #2c3e50;
     color: #f0f0f0;
@@ -42,99 +42,158 @@ body.splash-body {
     font-size: 16px;
     cursor: pointer;
     transition: 0.2s;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: #3a5068;
-  }
-  
-  .footer {
+}
+
+.footer {
     position: absolute;
     bottom: 10px;
     font-size: 12px;
     color: #aaa;
-  }
+}
 
 
 body.search-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  background-image: url('stars.jpg');
-  background-size: cover;
-  background-position: center;
-  color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    background-image: url('stars.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #f0f0f0;
 }
 
 .container {
-  max-width: 600px;
-  margin: 50px auto;
-  background-color: rgba(20, 20, 30, 0.85);
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.7);
-  text-align: center;
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: rgba(20, 20, 30, 0.85);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    text-align: center;
 }
 
 .container h1 {
-  color: #f5f5f5;
-  margin-bottom: 30px;
+    color: #f5f5f5;
+    margin-bottom: 30px;
 }
 
 .container label {
-  font-weight: bold;
-  display: block;
-  margin-top: 20px;
-  text-align: left;
+    font-weight: bold;
+    display: block;
+    margin-top: 20px;
+    text-align: left;
 }
 
 .container input[type="text"] {
-  width: 100%;
-  padding: 12px;
-  margin-top: 5px;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background-color: #1a1a1a;
-  color: #f0f0f0;
-  font-size: 16px;
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    font-size: 16px;
 }
 
 .container input::placeholder {
-  color: #888;
+    color: #888;
 }
 
 .container .note {
-  font-size: 13px;
-  color: #aaa;
-  margin-top: 5px;
-  text-align: left;
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 5px;
+    text-align: left;
 }
 
 .container button {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background-color: #2c3e50;
-  color: #f0f0f0;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  width: 100%;
-  transition: 0.2s;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #2c3e50;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.2s;
 }
 
 .container button:hover {
-  background-color: #3a5068;
+    background-color: #3a5068;
 }
 
 .container .bookmark-btn {
-  margin-top: 10px;
-  background-color: #444;
-  width: auto;
-  padding: 8px 16px;
+    margin-top: 10px;
+    background-color: #444;
+    width: auto;
+    padding: 8px 16px;
 }
 
 .container .bookmark-btn:hover {
-  background-color: #555;
+    background-color: #555;
 }
+
+.orbit-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: rgba(20, 20, 30, 0.85);
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+.orbit-container .section-title {
+    color: #9dc6ff;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.3rem;
+    text-align: left;
+}
+
+.orbit-container .orbital-list li {
+    margin-bottom: 0.4rem;
+    text-align: left;
+}
+
+.bookmark-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.orbit-container {
+    flex-grow: 1;
+    padding: 8px 12px;
+    background-color: #222;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.orbit-container:hover {
+    background-color: #333;
+}
+
+.remove-btn-inline {
+    padding: 4px 10px;
+    font-size: 14px;
+
+    background-color: #444;
+
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.remove-btn-inline:hover {
+    background-color: #555;
+}
+

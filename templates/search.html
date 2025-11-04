@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Solar System Explorer – Search</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8">
+    <title>Solar System Explorer – Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+
 <body class="search-body">
-  <div class="container">
-    <h1>Solar System Search</h1>
+    <div class="container">
+        <h1>Solar System Search</h1>
 
-    <label for="search">Search:</label>
+        <label for="search">Search:</label>
 
-    <form action="{{ url_for('results_page') }}" method="get">
-        <input type="text" name="q" id="search" placeholder="Search by IAU-recognized name or catalog code">
-        <div class="note">
-            Help: IAU name is the commonly agreed name (e.g., Jupiter or Io). Catalog code is the code (Jupiter I = Io, Jupiter’s first moon).
-          </div>
-        <button type="submit">Search</button>
-    </form>
+        <form action="{{ url_for('results_page') }}" method="get">
+            <input type="text" name="q" id="search" placeholder="Search by IAU-recognized name or catalog code">
+            <div class="note">
+                Help: Click and type in IAU name, also known as the common name (Jupiter, Mars, Io, etc). Catalog code
+                is the code (Jupiter I = Io, Jupiter's first moon. Press enter or click the search button show preform a
+                search).
+            </div>
+            <button type="submit">Search</button>
+        </form>
 
-    <button class="bookmark-btn" onclick="window.location.href={{ url_for('bookmarks_page') }}'">Bookmarks</button>
-  </div>
+        <button class="bookmark-btn" onclick="window.location.href='{{ url_for('bookmarks_page') }}'">Bookmarks</button>
+
+    </div>
 </body>
+
+
+<script>
+    function addBookmark(name) {
+        fetch(`/bookmark/add/${encodeURIComponent(name)}`)
+            .then(res => res.json())
+            .then(data => {
+                alert(`${data.name} added to bookmarks!`);
+            });
+    }
+</script>
+
 </html>
