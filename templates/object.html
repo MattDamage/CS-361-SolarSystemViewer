@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ obj.name }} – Solar System Explorer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="object-body">
+
+  <main>
+    <h1>{{ obj.name }}</h1>
+
+    <div class="info-row">
+      <span class="label">IAU Designation:</span>
+      <span class="value">{{ obj.designation }}</span>
+    </div>
+
+    <div class="info-row">
+      <span class="label">Type:</span>
+    
+    </div>
+
+    {% if obj.mean_radius %}
+    <div class="info-row">
+      <span class="label">Mean Radius:</span>
+      <span class="value">{{ obj.mean_radius }} km</span>
+    </div>
+    {% endif %}
+
+    {% if obj.mass %}
+    <div class="info-row">
+      <span class="label">Mass:</span>
+      <span class="value">{{ obj.mass.value }} × 10^{{ obj.mass.exponent }} kg</span>
+    </div>
+    {% endif %}
+
+    <div class="section-title">Orbital Parameters</div>
+    <ul class="orbital-list">
+      {% if obj.orbit.periapsis %}
+      <li><span class="label">Periapsis:</span> {{ obj.orbit.periapsis }} km</li>
+      {% endif %}
+      {% if obj.orbit.apoapsis %}
+      <li><span class="label">Apoapsis:</span> {{ obj.orbit.apoapsis }} km</li>
+      {% endif %}
+    </ul>
+
+    <div class="action-buttons">
+      <button class="btn" onclick="addBookmark('{{ obj.name }}')">Bookmark</button>
+      <button class="btn" onclick="window.history.back()">Back</button>
+      <button class="btn" id="helpBtn">How to read parameters?</button>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h2>How to Read Orbital Parameters</h2>
+        <ul>
+          <li><b>Periapsis / Apoapsis:</b> Closest and farthest points in orbit.</li>
+          <li><b>Semi-major Axis:</b> Average distance between the object and its parent body.</li>
+          <li><b>Eccentricity:</b> How circular (0) or elliptical (closer to 1) the orbit is.</li>
+          <li><b>Orbital Period:</b> Time to complete one orbit.</li>
+          <li><b>Average Orbital Speed:</b> How fast it travels around the parent.</li>
+          <li><b>Inclination:</b> Tilt of the orbit relative to a reference plane.</li>
+          <li><b>Longitude of Ascending Node:</b> Angle where orbit crosses reference plane.</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+  
+    const modal = document.getElementById("helpModal");
+    const btn = document.getElementById("helpBtn");
+    const closeBtn = document.getElementById("closeModal");
+
+    btn.onclick = () => modal.style.display = "block";
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = e => { if (e.target == modal) modal.style.display = "none"; };
+
+   
+    function addBookmark(name) {
+      alert(name + " added to bookmarks! (Demo)");
+    }
+  </script>
+
+</body>
+</html>
