@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookmarks – Solar System Explorer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="search-body">
+  <div class="container">
+  <main>
+    <h2>Saved Celestial Objects</h2>
+    <div>All of your saved objects will appear here for easy access!</div>
+
+    
+    <ul class="bookmark-list">
+      {% for obj in bookmarks %}
+      <li class="bookmark-item">
+        <a href="{{ url_for('object_page', designation=obj) }}">{{ obj }}</a>
+        <button class="remove-btn" onclick="confirmRemoval(this)">Remove</button>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <button class="btn" onclick="window.location.href='{{ url_for('search_page') }}'">Back to Search</button>
+  </div class="container">
+  </main>
+
+  <script>
+    function confirmRemoval(button) {
+      const confirmed = confirm("Are you sure you want to remove this bookmark?");
+      if (confirmed) {
+        const item = button.closest('.bookmark-item');
+        item.remove();
+      }
+    }
+  </script>
+</body>
+</html>

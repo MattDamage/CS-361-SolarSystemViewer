@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar System Explorer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="splash-body">
+  <div class="splash-container">
+    <h1>Solar System Explorer</h1>
+    <p>Discover planets, moons, and other celestial objects in our solar system.</p>
+    <button onclick="window.location.href='{{ url_for('search_page') }}'">Enter</button>
+  </div>
+
+  <div class="footer">
+    Data sources: NASA, IAU, JPL Small-Body Database
+  </div>
+</body>
+</html>

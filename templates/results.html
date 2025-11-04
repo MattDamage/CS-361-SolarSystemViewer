@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solar System Explorer - Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="search-body">
+    <div class="container">
+        <h1>Search Results for: "{{ query if query else '' }}"</h1>
+
+        <div id="results-list">
+    
+        </div>
+
+      
+        <button class="btn" onclick="window.location.href='{{ url_for('search_page') }}'">Back to Search</button>
+    </div>
+</body>
+</html>
