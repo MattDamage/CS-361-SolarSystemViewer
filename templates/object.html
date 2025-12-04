@@ -20,7 +20,8 @@
         <ul class="orbital-list">
           {% if obj.orbit %}
           {% for el in obj.orbit.elements %}
-          <li>
+          <li class="orbit-item"  data-title="{{ el.title }}"  data-value="{{ el.value }}" data-units="{{ el.units }}">
+            
             <span class="label">{{ el.title }}:</span>
             <span class="value">{{ el.value }} {% if el.units %}{{ el.units }}{% endif %}</span>
           </li>
@@ -30,10 +31,12 @@
           {% endif %}
         </ul>
       </div>
+      
 
       <div>
         <button onclick="addBookmark('{{ obj.object.fullname }}')">Bookmark</button>
         <button class="btn" onclick="downloadPDF()">Download Report</button>
+        <button onclick="convertAU()">Convert AU to km</button>
         <button class="btn" onclick="window.location.href='{{ url_for('search_page') }}'">Back to Search</button>
         
       </div>
@@ -66,6 +69,42 @@
       a.remove();
       window.URL.revokeObjectURL(url);
     }
+
+
+    async function convertAU()
+    {
+      
+      const items = document.querySelectorAll(".orbit-item");
+      
+      for (const li of items) 
+      {
+       
+
+          const units = li.dataset.units;
+          
+          if (units !== "au") continue;
+         
+          const value = parseFloat(li.dataset.value);
+
+        
+          const resp = await fetch("/convert_au", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ value })
+          });
+
+          const data = await resp.json();
+
+          // Update the display
+          li.querySelector(".value").textContent = `${data.value} km`;
+
+          // Update dataset so future conversions don't double-convert
+          li.dataset.value = data.value;
+          li.dataset.units = "km";
+      }
+    }
+
+
   </script>
 
 </body>

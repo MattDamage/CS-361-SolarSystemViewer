@@ -31,6 +31,7 @@
 
 <script>
     function addBookmark(name) {
+       
         fetch(`/bookmark/add/${encodeURIComponent(name)}`)
             .then(res => res.json())
             .then(data => {

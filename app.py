@@ -65,7 +65,7 @@ def object_page(name):
 ### MICROSERVICES
 
 PDF_SERVER = "tcp://localhost:8091"
-
+MATH_SERVER = "tcp://localhost:8094"
 
 
 def send_zmq_request(server_addr, request_dict):
@@ -119,6 +119,25 @@ def pdf_service(name):
         as_attachment=True,
         download_name=f"{obj['object']['fullname']}_report.pdf"
     )
+
+
+@app.route("/convert_au", methods=["POST"])
+def convert_au():
+    data = request.json
+    value = float(data["value"])
+
+   
+    request_obj = {
+        "module": "astronomy",
+        "function": "au_to_km",
+        "args": { "value": value }
+    }
+
+    resp = send_zmq_request(MATH_SERVER, request_obj)
+    km_value = resp["result"]
+
+    return jsonify({"value": km_value})
+
 
 #END
 
