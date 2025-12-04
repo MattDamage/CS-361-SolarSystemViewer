@@ -197,3 +197,10 @@ body.search-body {
     background-color: #555;
 }
 
+.object-image {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+    margin: 15px auto;
+}

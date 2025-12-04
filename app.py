@@ -65,7 +65,11 @@ def object_page(name):
 ### MICROSERVICES
 
 PDF_SERVER = "tcp://localhost:8091"
+GRAPH_SERVER = "tcp://localhost:8092"
+IMAGE_SERVER = "tcp://localhost:8093"
 MATH_SERVER = "tcp://localhost:8094"
+
+
 
 
 def send_zmq_request(server_addr, request_dict):
@@ -139,6 +143,67 @@ def convert_au():
     return jsonify({"value": km_value})
 
 
+
+@app.route("/object/<name>/image")
+def object_image(name):
+ 
+    cache_req = {
+        "action": "cache",
+        "keys": name,
+        "limit": 1
+    }
+    send_zmq_request(IMAGE_SERVER, cache_req)
+
+  
+    query_req = {
+        "action": "query",
+        "keys": name,
+        "limit": 1
+    }
+    resp = send_zmq_request(IMAGE_SERVER, query_req)
+
+   
+    try:
+        url = resp["result"][0]["url"]
+    except:
+        url = None
+
+    return jsonify({ "url": url })
+
+
+
+@app.route("/object/<name>/eccentricity-plot")
+def eccentricity_plot(name):
+    # Get object from cache (assumes your cache stores the full JPL response)
+    obj = search_cache.get(name)
+
+    # Extract eccentricity if available
+    try:
+        elements = obj["orbit"]["elements"]
+        ecc_entry = next(e for e in elements if e["name"] == "e")  # JPL uses "e" for eccentricity
+        ecc = float(ecc_entry["value"])
+    except Exception:
+        ecc = 0.1  # fallback value
+
+    request = {
+        "module": "graph",
+        "function": "eccentric_orbit",
+        "args": {
+            "ecc": ecc,
+            "samples": 500
+        }
+    }
+
+    # Call the graph microservice
+    resp = send_zmq_request(GRAPH_SERVER, request)
+    b64_img = resp["result"]  # microservice returns base64 string
+    img_bytes = base64.b64decode(b64_img)
+
+    return send_file(
+        io.BytesIO(img_bytes),
+        mimetype="image/png",
+        as_attachment=False
+    )
 #END
 
 
