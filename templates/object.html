@@ -33,7 +33,9 @@
 
       <div>
         <button onclick="addBookmark('{{ obj.object.fullname }}')">Bookmark</button>
+        <button class="btn" onclick="downloadPDF()">Download Report</button>
         <button class="btn" onclick="window.location.href='{{ url_for('search_page') }}'">Back to Search</button>
+        
       </div>
   </main>
 
@@ -48,6 +50,21 @@
 
     function addBookmark(name) {
       alert(name + " added to bookmarks! (Demo)");
+    }
+
+
+    async function downloadPDF()
+    {
+      const response = await fetch('{{ url_for("pdf_service", name=obj.object.fullname) }}');
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${'{{ obj.object.fullname }}'}_report.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
     }
   </script>
 
